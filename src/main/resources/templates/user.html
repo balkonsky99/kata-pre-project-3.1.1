@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о пользователе</title>
+
+    <style>
+        input {
+            font-size: 16px;
+            cursor: pointer;
+        }
+        form, a{
+            display: inline-block;
+        }
+
+        a {
+            margin-left: 20px;
+        }
+        a.edit {
+            margin-right: 10px;
+            margin-left: 150px;
+        }
+        .edit input {
+            background-color: darkseagreen;
+            cursor: pointer;
+        }
+        .edit input:hover {
+            background-color: mediumseagreen;
+        }
+        form input {
+            background-color: lightcoral;
+            cursor: pointer;
+        }
+        form input:hover {
+            background-color: indianred;
+        }
+        div {
+            padding-left: 20px;
+            width: 395px;
+            font-size: 20px;
+            position: relative;
+        }
+        .logout {
+            position: absolute;
+            top: -50px;
+            right: -60px;
+        }
+    </style>
+</head>
+<body>
+<h1>Информация обо мне</h1>
+<div>
+    <p>id – <span th:text="${user.getId()}"></span></p>
+    <p>Имя – <span th:text="${user.getFirstName()}"></span></p>
+    <p>Фамилия – <span th:text="${user.getLastName()}"></span></p>
+    <p>Возраст – <span th:text="${user.getAge()}"></span></p>
+    <hr/>
+    <a class="logout" th:href="@{/logout}"><input type="submit" value="Выход"/></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование пользователя</title>
+
+    <style>
+        form {
+            width: 310px;
+            margin-left: 20px;
+            font-size: 20px;
+        }
+        input {
+            font-size: 16px;
+        }
+        label {
+            float: left;
+        }
+        .done {
+            cursor: pointer;
+            float: right;
+        }
+        p {
+            margin:0 0 10px;
+        }
+        h4{
+            margin: 16px 0 8px;
+        }
+        div {
+            width: 270px;
+            text-align: right;
+            margin-left: 15px;
+            position: relative;
+        }
+        .logout {
+            position: absolute;
+            top: -50px;
+            right: -140px;
+        }
+    </style>
+</head>
+<body>
+<h1>Редактирование данных</h1>
+<form th:method="PATCH" th:action="@{/admin/user_{id}(id=${user.getId()})}" th:object="${user}">
+    <div>
+        <label for="enabled">Разрешена авторизация </label>
+        <input type="checkbox" th:field="*{enabled}" name="enabled" th:value="*{enabled}" th:checked="*{enabled}" id="enabled" />
+        <br/>
+        <br/>
+        <br/>
+        <label for="username">Логин: </label>
+        <input type="text" th:field="*{username}" id="username" />
+        <br/>
+        <br/>
+        <label for="password">Пароль: </label>
+        <input type="text" th:field="*{password}" id="password" />
+        <br/>
+        <br/>
+        <label for="firstName">Имя: </label>
+        <input type="text" th:field="*{firstName}" id="firstName" />
+        <br/>
+        <br/>
+        <label for="lastName">Фамилия: </label>
+        <input type="text" th:field="*{lastName}" id="lastName" />
+        <br/>
+        <br/>
+        <label for="age">Возраст: </label>
+        <input type="text" th:field="*{age}" id="age" />
+        <br/>
+        <br/>
+        <h4>Роли:</h4>
+        <label style="float: none; display: inline-block; width: 80%;" for="role_admin">ADMIN</label>
+        <input th:type="checkbox" id="role_admin" th:name="ROLE_ADMIN" th:value="ROLE_ADMIN">
+        <label style="float: none; display: inline-block; width: 80%;" for="role_user">USER</label>
+        <input th:type="checkbox" id="role_user" th:name="ROLE_USER" th:value="ROLE_USER">
+        <br/>
+        <br/>
+        <a class="logout" th:href="@{/logout}"><input type="submit" value="Выход"/></a>
+    </div>
+    <hr/>
+    <input class="done" type="submit" value="Готово" />
+</form>
+</body>
+</html>
