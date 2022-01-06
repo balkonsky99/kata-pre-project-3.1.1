@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import ru.balkonsky.springbootmvc.dao.RoleDao;
 import ru.balkonsky.springbootmvc.model.Role;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RoleServiceImp implements RoleService{
@@ -25,5 +27,14 @@ public class RoleServiceImp implements RoleService{
     @Override
     public List<Role> getAllRoles() {
         return roleDao.getAllRoles();
+    }
+
+    @Override
+    public HashSet<Role> getSetOfListRoles (List<String> listRoleNames) {
+        HashSet<Role> roleSet = new HashSet<>();
+        for (String role : listRoleNames) {
+            roleSet.add(getRoleByRoleName(role));
+        }
+        return roleSet;
     }
 }

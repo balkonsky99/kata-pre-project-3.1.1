@@ -45,6 +45,9 @@
             top: -50px;
             right: -60px;
         }
+        .logout input {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -55,7 +58,7 @@
     <p>Фамилия – <span th:text="${user.getLastName()}"></span></p>
     <p>Возраст – <span th:text="${user.getAge()}"></span></p>
     <hr/>
-    <a class="logout" th:href="@{/logout}"><input type="submit" value="Выход"/></a>
+    <a class="logout" th:href="@{/logout}"><input type="button" value="Выход"/></a>
 </div>
 </body>
 </html>

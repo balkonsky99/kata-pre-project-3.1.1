@@ -10,6 +10,7 @@ import ru.balkonsky.springbootmvc.service.RoleService;
 import ru.balkonsky.springbootmvc.service.UserService;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -47,21 +48,13 @@ public class AdminController {
 
     @PostMapping()
     public String create (@ModelAttribute("user") User user,
-                          @RequestParam(required = false, name = "ROLE_ADMIN") String roleAdmin,
-                          @RequestParam(required = false, name = "ROLE_USER") String roleUser) {
-
+                          @RequestParam(required = false, value = "listRoleNames") List<String> listRoleNames) {
         Set<Role> roles = new HashSet<>();
-
-        if (roleAdmin != null) {
-            roles.add(roleService.getRoleByRoleName("ROLE_ADMIN"));
-        }
-        if (roleUser != null) {
+        if (listRoleNames != null) {
+            roles = roleService.getSetOfListRoles(listRoleNames);
+        }else {
             roles.add(roleService.getRoleByRoleName("ROLE_USER"));
         }
-        if (roleAdmin == null && roleUser == null) {
-            roles.add(roleService.getRoleByRoleName("ROLE_USER"));
-        }
-
         user.setRoles(roles);
         userService.saveUser(user);
 
@@ -78,21 +71,14 @@ public class AdminController {
 
     @PatchMapping("/user_{id}")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") int id,
-                         @RequestParam(required = false, name = "ROLE_ADMIN") String roleAdmin,
-                         @RequestParam(required = false, name = "ROLE_USER") String roleUser) {
+                         @RequestParam(required = false, value = "listRoleNames") List<String> listRoleNames) {
 
         Set<Role> roles = new HashSet<>();
-
-        if (roleAdmin != null) {
-            roles.add(roleService.getRoleByRoleName("ROLE_ADMIN"));
-        }
-        if (roleUser != null) {
+        if (listRoleNames != null) {
+            roles = roleService.getSetOfListRoles(listRoleNames);
+        }else {
             roles.add(roleService.getRoleByRoleName("ROLE_USER"));
         }
-        if (roleAdmin == null && roleUser == null) {
-            roles.add(roleService.getRoleByRoleName("ROLE_USER"));
-        }
-
         user.setRoles(roles);
         userService.updateUser(user, id);
 

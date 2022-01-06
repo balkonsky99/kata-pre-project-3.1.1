@@ -50,6 +50,9 @@
             top: -50px;
             right: -90px;
         }
+        a input {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -67,9 +70,9 @@
         <span th:text="${role.getName().substring(5)}"></span>
     </p>
     <hr/>
-    <a class="logout" th:href="@{/logout}"><input type="submit" value="Выход"/></a>
+    <a class="logout" th:href="@{/logout}"><input type="button" value="Выход"/></a>
 </div>
-<a th:href="@{/admin}"><input type="submit" value="Назад"/></a>
+<a th:href="@{/admin}"><input type="button" value="Назад"/></a>
 <a class="edit" th:href="@{/admin/user_{id}/edit(id=${user.getId()})}"><input type="submit" value="Изменить"/></a>
 <form th:method="DELETE" th:action="@{/admin/user_{id}(id=${user.getId()})}">
     <input type="submit" value="Удалить" />

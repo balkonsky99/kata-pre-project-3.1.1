@@ -61,6 +61,9 @@
             top: 0;
             right: -105px;
         }
+        .logout input {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -91,7 +94,7 @@
         </tr>
         </tbody>
     </table>
-    <a class="logout" th:href="@{/logout}"><input type="submit" value="Выход"/></a>
+    <a class="logout" th:href="@{/logout}"><input type="button" value="Выход"/></a>
 </div>
 <br/>
 <div>

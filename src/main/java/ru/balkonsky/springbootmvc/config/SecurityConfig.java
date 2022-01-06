@@ -28,16 +28,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .addFilterBefore(new EncodingFilter(), ChannelProcessingFilter.class)
+                .formLogin().permitAll()
+                .successHandler(loginSuccessHandler)
+                .and()
                 .authorizeRequests()
                 .antMatchers("/").anonymous()
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .anyRequest()
                 .authenticated()
-                .and()
-                .formLogin().permitAll()
-                .successHandler(loginSuccessHandler)
                 .and()
                 .logout()
                 .permitAll()

@@ -5,7 +5,6 @@ import ru.balkonsky.springbootmvc.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -16,9 +15,7 @@ public class UserDaoImp implements UserDao{
 
     @Override
     public List<User> getAllUsers() {
-        TypedQuery<User> query = (TypedQuery<User>) entityManager.createNativeQuery("SELECT * from users", User.class);
-
-        return query.getResultList();
+        return entityManager.createQuery("select distinct u from User u join fetch u.roles", User.class).getResultList();
     }
 
     public User showUserById(int id){
@@ -40,9 +37,7 @@ public class UserDaoImp implements UserDao{
 
     @Override
     public User getUserByUsername(String username) {
-        TypedQuery<User> query = (TypedQuery<User>) entityManager.createNativeQuery("SELECT * FROM users where username = :username", User.class);
-        query.setParameter("username", username);
-        return query.getSingleResult();
+        return (User) entityManager.createQuery("select u from User u join fetch u.roles where u.username=:username")
+                                    .setParameter("username", username).getSingleResult();
     }
-
 }

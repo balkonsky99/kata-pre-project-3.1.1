@@ -36,6 +36,10 @@
             position: absolute;
             top: -50px;
             right: -140px;
+            cursor: pointer;
+        }
+        .logout input {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -69,13 +73,11 @@
         <br/>
         <br/>
         <h4>Роли:</h4>
-        <label style="float: none; display: inline-block; width: 80%;" for="role_admin">ADMIN</label>
-        <input th:type="checkbox" id="role_admin" th:name="ROLE_ADMIN" th:value="ROLE_ADMIN">
-        <label style="float: none; display: inline-block; width: 80%;" for="role_user">USER</label>
-        <input th:type="checkbox" id="role_user" th:name="ROLE_USER" th:value="ROLE_USER">
+        <div style="margin-left: 0;" th:each="role : ${roles}">
+            <input style="float: right; display: inline-block; margin: 4px 0 4px 8px;" th:type="checkbox" name="listRoleNames" th:value="${role.getName()}" th:text="${role.getName().substring(5)}">
+        </div>
         <br/>
-        <br/>
-        <a class="logout" th:href="@{/logout}"><input type="submit" value="Выход"/></a>
+        <a class="logout" th:href="@{/logout}"><input type="button" value="Выход"/></a>
     </div>
     <hr/>
     <input class="done" type="submit" value="Готово" />
